@@ -1,0 +1,368 @@
+<title>Test 4 — Confirmatory Results</title>
+<style>
+  :root {
+    --ground: #10141b;
+    --panel: #171d27;
+    --panel-2: #1d2531;
+    --hair: #2a3341;
+    --ink: #e9edf2;
+    --ink-soft: #b7c1cf;
+    --muted: #8592a3;
+    --accent: #3fb9a3;          /* signal emerging — used sparingly */
+    --accent-dim: #2b6f66;
+    --good: #57a879;            /* validated */
+    --warn: #d59a4c;            /* underpowered hint */
+    --cold: #6f88b0;            /* abstention / can't-tell */
+    --landed: #3fb9a3;
+    --landed-2: #7f6fd0;        /* independent arm */
+    --shadow: 0 1px 0 rgba(255,255,255,.02), 0 8px 30px rgba(0,0,0,.35);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground: #f4f2ec;
+      --panel: #fbfaf6;
+      --panel-2: #f1eee6;
+      --hair: #ddd8cc;
+      --ink: #1c2129;
+      --ink-soft: #3c4552;
+      --muted: #6b7686;
+      --accent: #1f8b78;
+      --accent-dim: #a9d8ce;
+      --good: #3c8a5c;
+      --warn: #b3792b;
+      --cold: #4f6994;
+      --landed: #1f8b78;
+      --landed-2: #6553b0;
+      --shadow: 0 1px 0 rgba(255,255,255,.6), 0 10px 30px rgba(60,55,40,.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #10141b; --panel: #171d27; --panel-2: #1d2531; --hair: #2a3341;
+    --ink: #e9edf2; --ink-soft: #b7c1cf; --muted: #8592a3;
+    --accent: #3fb9a3; --accent-dim: #2b6f66; --good: #57a879; --warn: #d59a4c; --cold: #6f88b0;
+    --landed: #3fb9a3; --landed-2: #7f6fd0;
+    --shadow: 0 1px 0 rgba(255,255,255,.02), 0 8px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --ground: #f4f2ec; --panel: #fbfaf6; --panel-2: #f1eee6; --hair: #ddd8cc;
+    --ink: #1c2129; --ink-soft: #3c4552; --muted: #6b7686;
+    --accent: #1f8b78; --accent-dim: #a9d8ce; --good: #3c8a5c; --warn: #b3792b; --cold: #4f6994;
+    --landed: #1f8b78; --landed-2: #6553b0;
+    --shadow: 0 1px 0 rgba(255,255,255,.6), 0 10px 30px rgba(60,55,40,.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 40px) 72px; }
+
+  /* ---- header ---- */
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 600; text-wrap: balance;
+    font-size: clamp(30px, 5.4vw, 50px); line-height: 1.05; letter-spacing: -.01em;
+    margin: 0 0 10px;
+  }
+  .dek {
+    font-family: var(--serif); font-style: italic; color: var(--ink-soft);
+    font-size: clamp(16px, 2.3vw, 20px); max-width: 60ch; margin: 0 0 26px;
+  }
+  .metastrip {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;
+  }
+  .stat {
+    display: flex; flex-direction: column; gap: 2px;
+    background: var(--panel); border: 1px solid var(--hair); border-radius: 10px;
+    padding: 9px 14px; min-width: 92px;
+  }
+  .stat b { font-family: var(--mono); font-size: 17px; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .stat span { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  .stat.ok b { color: var(--good); }
+
+  /* ---- finding cards ---- */
+  .card {
+    background: var(--panel); border: 1px solid var(--hair); border-radius: 16px;
+    padding: clamp(20px, 3vw, 30px); margin-top: 22px; box-shadow: var(--shadow);
+  }
+  .card-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+  .fno { font-family: var(--serif); font-size: 15px; color: var(--muted); font-variant-numeric: oldstyle-nums; }
+  .card h2 {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(21px, 3.2vw, 28px);
+    letter-spacing: -.01em; margin: 0; flex: 1 1 auto; text-wrap: balance;
+  }
+  .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; white-space: nowrap; border: 1px solid transparent;
+  }
+  .chip.val { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); border-color: color-mix(in srgb, var(--good) 34%, transparent); }
+  .chip.rob { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); border-color: color-mix(in srgb, var(--accent) 34%, transparent); }
+  .chip.hint { color: var(--warn); background: color-mix(in srgb, var(--warn) 15%, transparent); border-color: color-mix(in srgb, var(--warn) 36%, transparent); }
+  .lede { color: var(--ink-soft); font-size: 15.5px; margin: 12px 0 20px; max-width: 66ch; }
+  .lede b, .card p b { color: var(--ink); font-weight: 600; }
+
+  /* ---- tier bar chart ---- */
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 0 0 16px; font-size: 12.5px; color: var(--muted); }
+  .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .tiers { display: flex; flex-direction: column; gap: 14px; }
+  .tier { display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: center; }
+  .tier .who { display: flex; flex-direction: column; gap: 1px; }
+  .tier .who b { font-size: 14px; }
+  .tier .who span { font-size: 11.5px; color: var(--muted); }
+  .bars { display: flex; flex-direction: column; gap: 6px; }
+  .bar-row { display: grid; grid-template-columns: 1fr 52px; align-items: center; gap: 10px; }
+  .track { position: relative; height: 16px; background: var(--panel-2); border-radius: 6px; overflow: hidden; border: 1px solid var(--hair); }
+  .fill { height: 100%; border-radius: 6px 0 0 6px; }
+  .fill.coord { background: linear-gradient(90deg, var(--landed), color-mix(in srgb, var(--landed) 70%, #fff 8%)); }
+  .fill.indep { background: linear-gradient(90deg, var(--landed-2), color-mix(in srgb, var(--landed-2) 70%, #fff 8%)); }
+  .val { font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink-soft); }
+  .canttell { font-family: var(--mono); font-size: 11.5px; color: var(--cold); margin-top: 5px; }
+  .canttell b { color: var(--cold); }
+
+  .keyline { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; margin: 20px 0 2px; color: var(--ink-soft); font-size: 15px; }
+  .keyline.warnline { border-color: var(--warn); }
+
+  /* ---- dissociation ---- */
+  .diss { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 4px 0 8px; }
+  @media (max-width: 620px) { .diss { grid-template-columns: 1fr; } }
+  .disscol { background: var(--panel-2); border: 1px solid var(--hair); border-radius: 12px; padding: 16px 18px; }
+  .disscol h3 { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 500; }
+  .db { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+  .db-lab { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-soft); }
+  .db-lab .n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .db .track { height: 20px; }
+  .fill.priv { background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #fff 12%)); }
+  .fill.said { background: var(--cold); }
+  .gaptag { font-family: var(--mono); font-size: 12.5px; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  /* ---- hubs ---- */
+  .hubs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; }
+  @media (max-width: 620px) { .hubs { grid-template-columns: 1fr; } .arrow { transform: rotate(90deg); justify-self: center; } }
+  .hubbox { background: var(--panel-2); border: 1px solid var(--hair); border-radius: 12px; padding: 15px 17px; }
+  .hubbox h3 { font-size: 12px; margin: 0 0 4px; color: var(--muted); font-weight: 600; }
+  .hubbox .sub { font-size: 11.5px; color: var(--muted); margin: 0 0 12px; }
+  .hubbox.bad h3 { color: var(--warn); }
+  .hubbox.good h3 { color: var(--good); }
+  .namep { display: flex; flex-wrap: wrap; gap: 7px; }
+  .namep span { font-family: var(--mono); font-size: 12.5px; padding: 4px 9px; border-radius: 7px; background: var(--panel); border: 1px solid var(--hair); font-variant-numeric: tabular-nums; }
+  .namep span.hi { border-color: var(--accent-dim); color: var(--ink); }
+  .arrow { color: var(--muted); font-size: 22px; text-align: center; }
+
+  /* ---- headline / hint ---- */
+  .hbars { display: flex; flex-direction: column; gap: 12px; margin: 6px 0 14px; }
+  .hbar { display: grid; grid-template-columns: 130px 1fr; gap: 14px; align-items: center; }
+  .hbar .lbl { font-size: 13px; color: var(--ink-soft); }
+  .hbar .lbl span { display: block; font-size: 11px; color: var(--muted); }
+  .htrack { position: relative; height: 34px; background: var(--panel-2); border: 1px solid var(--hair); border-radius: 8px; }
+  .hrange { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--warn) 16%, transparent); border-left: 1px dashed color-mix(in srgb, var(--warn) 55%, transparent); border-right: 1px dashed color-mix(in srgb, var(--warn) 55%, transparent); }
+  .hmean { position: absolute; top: -3px; bottom: -3px; width: 3px; background: var(--warn); border-radius: 2px; }
+  .hmean::after { content: attr(data-v); position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11.5px; color: var(--warn); font-variant-numeric: tabular-nums; }
+  .statgrid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .mini { background: var(--panel-2); border: 1px solid var(--hair); border-radius: 9px; padding: 8px 13px; }
+  .mini b { font-family: var(--mono); font-size: 15px; font-variant-numeric: tabular-nums; }
+  .mini span { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+
+  /* ---- footer ---- */
+  .foot { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .foot { grid-template-columns: 1fr; } }
+  .foot .card { margin: 0; }
+  .foot h2 { font-size: 18px; }
+  .run { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-soft); margin: 3px 0; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .dot.live { background: var(--accent); box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); animation: pulse 2.4s infinite; }
+  .dot.next { background: var(--muted); }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent);} 70%{box-shadow:0 0 0 8px transparent;} 100%{box-shadow:0 0 0 0 transparent;} }
+  @media (prefers-reduced-motion: reduce) { .dot.live { animation: none; } }
+  .method { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-top: 30px; border-top: 1px solid var(--hair); padding-top: 18px; }
+  .method b { color: var(--ink-soft); }
+  .method code { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Confirmatory run · COMPLETE · n=72/arm · 2026-07-06 · llama3.1:8b</p>
+  <h1>The under-informed knew to say “I don’t know.”</h1>
+  <p class="dek">Test 4 — tetravalent help-seeking with graded epistemic access. Twenty agents, four tiers of knowing, one culprit, 144 independent runs. What they believed, what they’d admit, and where a false story spreads.</p>
+
+  <div class="metastrip">
+    <div class="stat ok"><b>144/144</b><span>units clean</span></div>
+    <div class="stat ok"><b>0</b><span>failures</span></div>
+    <div class="stat ok"><b>0</b><span>meta-aware</span></div>
+    <div class="stat"><b>72</b><span>seeds / arm</span></div>
+    <div class="stat"><b>R=3</b><span>rounds</span></div>
+    <div class="stat"><b>~157s</b><span>per seed</span></div>
+  </div>
+
+  <!-- FINDING 1 -->
+  <section class="card">
+    <div class="card-head">
+      <span class="fno">Finding 1</span>
+      <h2>Epistemic access predicted who convicted — and who correctly abstained</h2>
+      <span class="chip val">Validated · n=72</span>
+    </div>
+    <p class="lede">Only agents who could actually <b>triangulate the two hidden fragments</b> landed the real culprit (Dmitri). The single-fragment witnesses — who genuinely <i>cannot</i> know alone — almost never did. That’s not a failure; it’s calibration.</p>
+
+    <div class="legend">
+      <span><i style="background:var(--landed)"></i>Coordinated arm — lands Dmitri</span>
+      <span><i style="background:var(--landed-2)"></i>Independent arm — lands Dmitri</span>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="who"><b>Tier 3 · relay</b><span>can combine sources</span></div>
+        <div class="bars">
+          <div class="bar-row"><div class="track"><div class="fill coord" style="width:65.3%"></div></div><div class="val">0.65</div></div>
+          <div class="bar-row"><div class="track"><div class="fill indep" style="width:56.9%"></div></div><div class="val">0.57</div></div>
+          <div class="canttell">can’t-tell ≈ <b>0.81</b> — lowest, because they can resolve it</div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="who"><b>Tier 1 · involved</b><span>direct testimony</span></div>
+        <div class="bars">
+          <div class="bar-row"><div class="track"><div class="fill coord" style="width:36.4%"></div></div><div class="val">0.36</div></div>
+          <div class="bar-row"><div class="track"><div class="fill indep" style="width:38.3%"></div></div><div class="val">0.38</div></div>
+          <div class="canttell">can’t-tell ≈ <b>0.91</b> — real hedging even with first-hand knowledge</div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="who"><b>Tier 4 · sink</b><span>can only ask</span></div>
+        <div class="bars">
+          <div class="bar-row"><div class="track"><div class="fill coord" style="width:17.2%"></div></div><div class="val">0.17</div></div>
+          <div class="bar-row"><div class="track"><div class="fill indep" style="width:18.1%"></div></div><div class="val">0.18</div></div>
+          <div class="canttell">can’t-tell ≈ <b>0.95</b> — the most cautious of all</div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="who"><b>Tier 2 · witness</b><span>one fragment only</span></div>
+        <div class="bars">
+          <div class="bar-row"><div class="track"><div class="fill coord" style="width:1.4%"></div></div><div class="val">0.01</div></div>
+          <div class="bar-row"><div class="track"><div class="fill indep" style="width:0.3%"></div></div><div class="val">0.00</div></div>
+          <div class="canttell">can’t-tell ≈ <b>0.91</b> — near-perfect abstention: one clue can’t triangulate</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="keyline">The order isn’t “higher tier, more certainty.” It’s <b>“can you triangulate?”</b> — the relay layer that combines fragments convicts most; the lone witnesses correctly abstain. Abstention is the <b>right</b> answer for the ignorant-who-can’t-triangulate, exactly the founding thesis.</p>
+  </section>
+
+  <!-- FINDING 2 -->
+  <section class="card">
+    <div class="card-head">
+      <span class="fno">Finding 2</span>
+      <h2>They believed far more than they would say out loud</h2>
+      <span class="chip rob">Robust · both arms</span>
+    </div>
+    <p class="lede">The unexpected catch. Read the agents’ <b>graded belief</b> and they land the culprit ~29% of the time. Ask them to <b>commit out loud</b> and it collapses to ~1.5%. A large, reproducible gap between what is held and what is asserted — present in every arm across 48 runs.</p>
+
+    <div class="diss">
+      <div class="disscol">
+        <h3>Coordinated arm</h3>
+        <div class="db">
+          <div class="db-lab"><span>Privately lands Dmitri (graded belief)</span><span class="n">0.301</span></div>
+          <div class="track"><div class="fill priv" style="width:30.1%"></div></div>
+        </div>
+        <div class="db">
+          <div class="db-lab"><span>Says it out loud (hard commit)</span><span class="n">0.024</span></div>
+          <div class="track"><div class="fill said" style="width:2.4%"></div></div>
+        </div>
+        <div class="gaptag">gap +0.276</div>
+      </div>
+      <div class="disscol">
+        <h3>Independent arm</h3>
+        <div class="db">
+          <div class="db-lab"><span>Privately lands Dmitri (graded belief)</span><span class="n">0.284</span></div>
+          <div class="track"><div class="fill priv" style="width:28.4%"></div></div>
+        </div>
+        <div class="db">
+          <div class="db-lab"><span>Says it out loud (hard commit)</span><span class="n">0.019</span></div>
+          <div class="track"><div class="fill said" style="width:1.9%"></div></div>
+        </div>
+        <div class="gaptag">gap +0.265</div>
+      </div>
+    </div>
+
+    <p class="keyline">This is <b>why the tetravalent “maybe” has to exist.</b> Force a binary name-or-abstain and you destroy a belief the agent is actually holding. The graded state is where the signal lives — measuring it was the difference between a 100% floor and a readable result.</p>
+  </section>
+
+  <!-- FINDING 3 -->
+  <section class="card">
+    <div class="card-head">
+      <span class="fno">Finding 3</span>
+      <h2>The “most-trusted” hub was an artifact — until we fixed it</h2>
+      <span class="chip val">Method validated</span>
+    </div>
+    <p class="lede">In the first pass, the agent everyone asked was simply whoever sat near the <b>top of the list</b> shown to them. Randomizing that list order per call moved the hubs to ones earned on <b>merit</b> — so the emergent-group analysis is now trustworthy.</p>
+    <div class="hubs">
+      <div class="hubbox bad">
+        <h3>Before — position artifact</h3>
+        <p class="sub">hub = roster position, not reputation</p>
+        <div class="namep"><span class="hi">Tomas · pos 2</span><span>Priya · pos 1</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="hubbox good">
+        <h3>After #3b — earned on merit</h3>
+        <p class="sub">in-degree over 72 seeds</p>
+        <div class="namep"><span class="hi">Sofia · 446</span><span class="hi">Mei · 370</span><span class="hi">Ingrid · 312</span><span>Kwame · 231</span></div>
+      </div>
+    </div>
+    <p class="keyline">A quieter but important win: <b>2,056 “ask them again” requests</b> were blocked by the no-repeat rule — real preferential-attachment stickiness the network wanted to form.</p>
+  </section>
+
+  <!-- HINT -->
+  <section class="card">
+    <div class="card-head">
+      <span class="fno">The headline</span>
+      <h2>Do coordinated liars manufacture more false consensus?</h2>
+      <span class="chip val">Confirmed · n=72</span>
+    </div>
+    <p class="lede">The pre-registered hypothesis. Two liars aiming at the <b>same</b> scapegoat (coordinated) vs each at a <b>different</b> one (independent). At full power the answer is <b>yes</b> — coordinated lying spreads the false name reliably more, and the effect <b>sharpened monotonically</b> as seeds accumulated (p: 0.10 → 0.054 → 0.0004). Small in absolute size, but real: it tilts the collective, it doesn’t dominate it.</p>
+
+    <div class="hbars">
+      <div class="hbar">
+        <div class="lbl">Coordinated<span>both → one scapegoat</span></div>
+        <div class="htrack"><div class="hrange" style="left:0%;right:70%"></div><div class="hmean" style="left:13.4%" data-v="0.067"></div></div>
+      </div>
+      <div class="hbar">
+        <div class="lbl">Independent<span>each → different</span></div>
+        <div class="htrack"><div class="hrange" style="left:0%;right:60%"></div><div class="hmean" style="left:7.6%" data-v="0.038"></div></div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin:0 0 4px;">Bars show the observed spread (min–max, dashed) of the scapegoat’s “involved” rate across 72 seeds; marker = mean. Scale 0 → 0.50.</p>
+
+    <div class="statgrid">
+      <div class="mini"><b>+0.029</b><span>contrast</span></div>
+      <div class="mini"><b style="color:var(--good)">0.66</b><span>Cohen’s d</span></div>
+      <div class="mini"><b style="color:var(--good)">0.0004</b><span>p · permutation</span></div>
+      <div class="mini"><b style="color:var(--good)">[.015, .044]</b><span>95% CI · diff</span></div>
+    </div>
+
+    <p class="keyline">Verdict at full power: <b>confirmed — right direction, medium effect (d=0.66), clearly significant</b> (permutation p = 0.0004, 95% CI excludes zero with margin at 72 seeds/arm). The borderline signal at n=24/31 resolved into a clean result at n=72 with <b>no change to the frozen method</b> — the power-up worked exactly as designed.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <section class="card">
+      <h2>Complete · n=72/arm</h2>
+      <div class="run"><span class="dot" style="background:var(--good)"></span> Full run done: 144/144 units, 0 failures, all schema PASS</div>
+      <div class="run"><span class="dot" style="background:var(--good)"></span> Definitive report written; prior-art re-scan folded in (GREEN)</div>
+    </section>
+    <section class="card">
+      <h2>What holds</h2>
+      <div class="run"><span class="dot" style="background:var(--good)"></span> Graded access → calibrated conviction</div>
+      <div class="run"><span class="dot" style="background:var(--good)"></span> Belief ↔ assertion dissociation (+0.27)</div>
+      <div class="run"><span class="dot" style="background:var(--good)"></span> Arm A&gt;B — CONFIRMED, p=0.0004</div>
+    </section>
+  </div>
+
+  <p class="method">
+    <b>Method.</b> 20 LLM agents (llama3.1:8b), 4 epistemic tiers × 5, whodunit with fixed external ground truth (Dmitri). Two arms — coordinated vs independent liars — × 72 seeds, R=3 concurrent rounds. Primary outcome = graded per-suspect belief (tetravalent ja/nei/kanskje/kanskje-ikke); model-driven ask-targeting with randomized roster order. PIMMUR validity gate cleared on the deployment model; post-hoc meta-awareness scan 0/… across all runs.
+    <br><b>Credits.</b> Fagin/Halpern distributed-knowledge logic · Bikhchandani-Hirshleifer-Welch (1992) &amp; DeGroot (1974) for the coordinated-worse-than-independent prediction · PIMMUR (arXiv:2509.18052) validity framework. Cohen’s d is a descriptive effect size, not a significance test.
+  </p>
+</div>
