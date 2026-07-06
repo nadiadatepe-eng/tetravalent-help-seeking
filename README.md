@@ -56,6 +56,14 @@ The paper carries a validity gate (PIMMUR, arXiv:2509.18052) cleared by an indep
 meta-awareness scan (0/144 transcripts showed agents recognizing the setup), and an explicit limitations
 section. The coordination effect is reported as *modest*, not dominant. Nothing here is overclaimed.
 
+## Where this lives
+
+- **GitHub (canonical, browsable):** https://github.com/nadiadatepe-eng/tetravalent-help-seeking
+- **OSF (archive, DOI-capable):** https://osf.io/2scbp/ — a component of the tetravalent project
+  [*From the Schrödinger Equation to a Tetravalent Synthetic Brain*](https://osf.io/h9xcr/).
+  Note: on OSF, `PREREG.md` is posted as a **study protocol**, not an OSF-timestamped preregistration
+  (the confirmatory data was already collected) — see the OSF component note.
+
 ## Status
 
 Draft, editor-verified post-confirmatory (2026-07-06). Prior-art GREEN. Not yet submitted to a venue.
